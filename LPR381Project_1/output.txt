@@ -1,0 +1,86 @@
+=========================================
+   BRANCH & BOUND KNAPSACK ALGORITHM     
+=========================================
+
+
+--- Evaluating Node 1 (Level: -1) ---
+Current Value: 0, Current Weight: 0
+Calculated Bound: 13.200
+*** New Best Candidate Found: Z = 2 ***
+
+--- Evaluating Node 2 (Level: 0) ---
+Current Value: 0, Current Weight: 0
+Calculated Bound: 13.800
+*** New Best Candidate Found: Z = 3 ***
+
+--- Evaluating Node 3 (Level: 1) ---
+Current Value: 0, Current Weight: 0
+Calculated Bound: 14.000
+
+--- Evaluating Node 4 (Level: 2) ---
+Current Value: 0, Current Weight: 0
+Calculated Bound: 11.000
+*** New Best Candidate Found: Z = 5 ***
+
+--- Evaluating Node 5 (Level: 3) ---
+Current Value: 0, Current Weight: 0
+Calculated Bound: 6.000
+
+--- Evaluating Node 6 (Level: 4) ---
+Current Value: 2, Current Weight: 10
+Calculated Bound: 6.000
+*** New Best Candidate Found: Z = 6 ***
+
+--- Evaluating Node 7 (Level: 3) ---
+Current Value: 5, Current Weight: 14
+Calculated Bound: 11.000
+*** New Best Candidate Found: Z = 7 ***
+
+--- Evaluating Node 8 (Level: 4) ---
+Current Value: 5, Current Weight: 14
+Calculated Bound: 9.000
+*** New Best Candidate Found: Z = 9 ***
+
+--- Evaluating Node 9 (Level: 4) ---
+Current Value: 7, Current Weight: 24
+Calculated Bound: 11.000
+*** New Best Candidate Found: Z = 11 ***
+
+--- Evaluating Node 10 (Level: 2) ---
+Current Value: 3, Current Weight: 6
+Calculated Bound: 14.000
+
+--- Evaluating Node 11 (Level: 3) ---
+Current Value: 8, Current Weight: 20
+Calculated Bound: 14.000
+
+--- Evaluating Node 12 (Level: 4) ---
+Current Value: 8, Current Weight: 20
+Calculated Bound: 12.000
+*** New Best Candidate Found: Z = 12 ***
+
+--- Evaluating Node 13 (Level: 4) ---
+Current Value: 10, Current Weight: 30
+Calculated Bound: 14.000
+*** New Best Candidate Found: Z = 14 ***
+
+--- Evaluating Node 14 (Level: 1) ---
+Current Value: 3, Current Weight: 8
+Calculated Bound: 13.800
+Node 14 Fathomed: Bound (13.800) is not better than Best Candidate (14).
+
+--- Evaluating Node 15 (Level: 0) ---
+Current Value: 2, Current Weight: 11
+Calculated Bound: 13.200
+Node 15 Fathomed: Bound (13.200) is not better than Best Candidate (14).
+
+=========================================
+          FINAL BEST CANDIDATE           
+=========================================
+Optimal Z = 14
+x1 = 0
+x2 = 0
+x3 = 1
+x4 = 1
+x5 = 1
+x6 = 1
