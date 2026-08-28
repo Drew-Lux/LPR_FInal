@@ -35,8 +35,16 @@ namespace LPR381_Project.Solvers
 
                 int numItems = model.ObjectiveCoefficients.Count;
                 double capacity = model.Constraints[0].RHS;
-                List<double> weights = model.Constraints[0].Coefficients;
-                List<double> values = model.ObjectiveCoefficients;
+
+                // The greedy/fractional bound below is only a valid upper bound when items
+                // are considered in decreasing value/weight ratio order at every level of the
+                // tree, so branch on items in that order instead of their original input order.
+                List<int> order = Enumerable.Range(0, numItems)
+                    .OrderByDescending(i => model.ObjectiveCoefficients[i] / model.Constraints[0].Coefficients[i])
+                    .ToList();
+
+                List<double> weights = order.Select(i => model.Constraints[0].Coefficients[i]).ToList();
+                List<double> values = order.Select(i => model.ObjectiveCoefficients[i]).ToList();
 
                 // Backtracking structure
                 Stack<KnapsackNode> stack = new Stack<KnapsackNode>();
@@ -125,6 +133,14 @@ namespace LPR381_Project.Solvers
                     }
                 }
 
+                // Map the best combination (recorded in sorted-order positions) back to the
+                // original variable indices for display.
+                int[] originalOrderResult = new int[numItems];
+                for (int sortedPos = 0; sortedPos < numItems; sortedPos++)
+                {
+                    originalOrderResult[order[sortedPos]] = bestCombination[sortedPos];
+                }
+
                 // Display Best Candidate[cite: 1]
                 writer.WriteLine("\n=========================================");
                 writer.WriteLine("          FINAL BEST CANDIDATE           ");
@@ -132,7 +148,7 @@ namespace LPR381_Project.Solvers
                 writer.WriteLine($"Optimal Z = {bestValue}");
                 for (int i = 0; i < numItems; i++)
                 {
-                    writer.WriteLine($"x{i + 1} = {bestCombination[i]}");
+                    writer.WriteLine($"x{i + 1} = {originalOrderResult[i]}");
                 }
             }
 
