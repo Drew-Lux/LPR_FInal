@@ -37,16 +37,21 @@ namespace LPR381_Project.Solvers
                     writer.WriteLine($"\n--- Evaluating Node {currentNode.NodeID} [{currentNode.BranchHistory}] ---");
 
                     // 1. Solve the Sub-Problem (LP Relaxation)
-                    // (In a complete implementation, this returns the solved tableau/values)
                     var result = SolveSubProblem(currentNode.Model, writer);
 
                     // 2. FATHOMING LOGIC
 
-                    // Fathom Condition 1: Infeasible
+                    // Fathom Condition 1: Infeasible (or unbounded)
                     if (!result.IsFeasible)
                     {
-                        writer.WriteLine($"Node {currentNode.NodeID} Fathomed: Infeasible sub-problem.");
+                        writer.WriteLine($"Node {currentNode.NodeID} Fathomed: {(result.IsUnbounded ? "Unbounded" : "Infeasible")} sub-problem.");
                         continue;
+                    }
+
+                    writer.WriteLine($"Relaxation Z = {result.Z:F3}");
+                    for (int i = 0; i < result.Variables.Length; i++)
+                    {
+                        writer.WriteLine($"x{i + 1} = {result.Variables[i]:F3}");
                     }
 
                     // Fathom Condition 2: Bound (Worse than our best known candidate)
@@ -177,14 +182,9 @@ namespace LPR381_Project.Solvers
             return newModel;
         }
 
-        private dynamic SolveSubProblem(LinearModel model, StreamWriter writer)
+        private LpRelaxationResult SolveSubProblem(LinearModel model, StreamWriter writer)
         {
-            // In a fully linked system, this instantiates your PrimalSimplexSolver,
-            // passes the writer so tableau iterations are logged[cite: 1], 
-            // and returns the final Feasibility, Z value, and Variable array.
-
-            // Dummy return for structural completion
-            return new { IsFeasible = true, Z = 0.0, Variables = new double[model.ObjectiveCoefficients.Count] };
+            return LpRelaxationSolver.Solve(model);
         }
     }
 }

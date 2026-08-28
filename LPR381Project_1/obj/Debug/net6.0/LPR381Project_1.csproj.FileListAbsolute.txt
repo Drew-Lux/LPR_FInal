@@ -1,0 +1,14 @@
+C:\Users\lordr\Downloads\bugfixing-main (1)\bugfixing-main\LPR381Project_1\bin\Debug\net6.0\LPR381Project_1.exe
+C:\Users\lordr\Downloads\bugfixing-main (1)\bugfixing-main\LPR381Project_1\bin\Debug\net6.0\LPR381Project_1.deps.json
+C:\Users\lordr\Downloads\bugfixing-main (1)\bugfixing-main\LPR381Project_1\bin\Debug\net6.0\LPR381Project_1.runtimeconfig.json
+C:\Users\lordr\Downloads\bugfixing-main (1)\bugfixing-main\LPR381Project_1\bin\Debug\net6.0\LPR381Project_1.dll
+C:\Users\lordr\Downloads\bugfixing-main (1)\bugfixing-main\LPR381Project_1\bin\Debug\net6.0\LPR381Project_1.pdb
+C:\Users\lordr\Downloads\bugfixing-main (1)\bugfixing-main\LPR381Project_1\obj\Debug\net6.0\LPR381Project_1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lordr\Downloads\bugfixing-main (1)\bugfixing-main\LPR381Project_1\obj\Debug\net6.0\LPR381Project_1.AssemblyInfoInputs.cache
+C:\Users\lordr\Downloads\bugfixing-main (1)\bugfixing-main\LPR381Project_1\obj\Debug\net6.0\LPR381Project_1.AssemblyInfo.cs
+C:\Users\lordr\Downloads\bugfixing-main (1)\bugfixing-main\LPR381Project_1\obj\Debug\net6.0\LPR381Project_1.csproj.CoreCompileInputs.cache
+C:\Users\lordr\Downloads\bugfixing-main (1)\bugfixing-main\LPR381Project_1\obj\Debug\net6.0\LPR381Project_1.dll
+C:\Users\lordr\Downloads\bugfixing-main (1)\bugfixing-main\LPR381Project_1\obj\Debug\net6.0\refint\LPR381Project_1.dll
+C:\Users\lordr\Downloads\bugfixing-main (1)\bugfixing-main\LPR381Project_1\obj\Debug\net6.0\LPR381Project_1.pdb
+C:\Users\lordr\Downloads\bugfixing-main (1)\bugfixing-main\LPR381Project_1\obj\Debug\net6.0\LPR381Project_1.genruntimeconfig.cache
+C:\Users\lordr\Downloads\bugfixing-main (1)\bugfixing-main\LPR381Project_1\obj\Debug\net6.0\ref\LPR381Project_1.dll
