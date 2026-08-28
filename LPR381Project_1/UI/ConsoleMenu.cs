@@ -303,7 +303,8 @@ namespace LPR381_Project.UI
                 _currentModel,
                 _lastOptimizationResult.FinalTableau,
                 _lastOptimizationResult.BasicVariables,
-                _lastOptimizationResult.NonBasicVariables
+                _lastOptimizationResult.NonBasicVariables,
+                (newModel) => _currentModel = newModel
             );
             sensMenu.Run();
         }

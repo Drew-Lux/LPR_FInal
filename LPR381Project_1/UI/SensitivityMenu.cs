@@ -9,12 +9,13 @@ namespace LPR381_Project.UI
     {
         private LinearModel _solvedModel;
         private SensitivityAnalyzer _analyzer;
+        private Action<LinearModel> _updateModelCallback;
 
-        // The constructor now takes the optimal state data to perform accurate analysis
-        public SensitivityMenu(LinearModel solvedModel, double[,] optimalTableau, List<int> basicVariables, List<int> nonBasicVariables)
+        public SensitivityMenu(LinearModel solvedModel, double[,] optimalTableau, List<int> basicVariables, List<int> nonBasicVariables, Action<LinearModel> updateCallback)
         {
             _solvedModel = solvedModel;
             _analyzer = new SensitivityAnalyzer(solvedModel, optimalTableau, basicVariables, nonBasicVariables);
+            _updateModelCallback = updateCallback;
         }
 
         public void Run()
@@ -64,6 +65,7 @@ namespace LPR381_Project.UI
                             if (double.TryParse(Console.ReadLine(), out double newCoef))
                             {
                                 LinearModel updatedModel = _analyzer.ApplyCoefficientChange(varIndex, newCoef);
+                                _updateModelCallback(updatedModel);
                                 Console.WriteLine("\nModel updated. You can now solve this modified model from the main menu.");
                             }
                         }
@@ -87,6 +89,7 @@ namespace LPR381_Project.UI
                         }
                         WaitForKey();
                         break;
+
                     case "6":
                         Console.Write($"Enter the zero-based index of the Constraint (0 to {_solvedModel.Constraints.Count - 1}): ");
                         if (int.TryParse(Console.ReadLine(), out int changeConstraintIndex))
@@ -95,6 +98,7 @@ namespace LPR381_Project.UI
                             if (double.TryParse(Console.ReadLine(), out double newRhs))
                             {
                                 LinearModel updatedModel = _analyzer.ApplyRhsChange(changeConstraintIndex, newRhs);
+                                _updateModelCallback(updatedModel);
                                 Console.WriteLine("\nRHS updated. You can now solve this modified model from the main menu.");
                             }
                         }
@@ -124,6 +128,7 @@ namespace LPR381_Project.UI
                                 }
                             }
                             LinearModel updatedColModel = _analyzer.ApplyColumnChange(changeColIndex, newCol);
+                            _updateModelCallback(updatedColModel);
                             Console.WriteLine("\nColumn updated. You can now solve this modified model from the main menu.");
                         }
                         WaitForKey();
@@ -145,11 +150,13 @@ namespace LPR381_Project.UI
                             Console.Write("Enter sign restriction (+, -, urs, int, bin): ");
                             string sign = Console.ReadLine();
 
-                            LinearModel updatedModel = _analyzer.AddNewActivity(objCoef, newConstraintCoefs, sign);
+                            LinearModel updatedActivityModel = _analyzer.AddNewActivity(objCoef, newConstraintCoefs, sign);
+                            _updateModelCallback(updatedActivityModel);
                             Console.WriteLine("\nNew activity added. You can solve this modified model from the main menu.");
                         }
                         WaitForKey();
                         break;
+
                     case "10":
                         Constraint newConstraint = new Constraint();
                         Console.WriteLine("Enter coefficients for the new constraint:");
@@ -167,11 +174,13 @@ namespace LPR381_Project.UI
                         if (double.TryParse(Console.ReadLine(), out double cRhs))
                         {
                             newConstraint.RHS = cRhs;
-                            LinearModel updatedModel = _analyzer.AddNewConstraint(newConstraint);
+                            LinearModel updatedConstraintModel = _analyzer.AddNewConstraint(newConstraint);
+                            _updateModelCallback(updatedConstraintModel);
                             Console.WriteLine("\nNew constraint added. You can solve this modified model from the main menu.");
                         }
                         WaitForKey();
                         break;
+
                     case "11":
                         _analyzer.DisplayShadowPrices();
                         WaitForKey();
@@ -211,7 +220,6 @@ namespace LPR381_Project.UI
                 ISolver dualSolver = new PrimalSimplexSolver();
                 dualSolver.Solve(dualModel, outPath);
 
-                // Verifying Strong/Weak Duality[cite: 1]
                 Console.WriteLine("\nComparing Primal Z and Dual W...");
                 Console.WriteLine("If Primal Z == Dual W, Strong Duality is verified.");
                 Console.WriteLine("If Primal Z != Dual W (but bounds exist), Weak Duality applies.");
